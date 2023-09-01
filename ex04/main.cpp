@@ -6,7 +6,7 @@
 /*   By: ddyankov <ddyankov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 17:24:29 by ddyankov          #+#    #+#             */
-/*   Updated: 2023/08/31 18:14:28 by ddyankov         ###   ########.fr       */
+/*   Updated: 2023/09/01 14:10:10 by ddyankov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int main(int ac, char **av)
 {
-    (void)av;
-    Replace replace;
+    Replace replace(ac);
     
-    replace.checkArgs(ac);
+    if (!replace.startReplace(av))
+        return 1;
     return 0;
 }
