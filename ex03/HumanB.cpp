@@ -14,6 +14,7 @@
 
 HumanB::HumanB(std::string name) : _name(name)
 {
+    _weapon = NULL;
     std::cout << "\033[1;32mHumanB " << _name <<  " constructor called\033[0m" << std::endl;
 }
 HumanB::~HumanB()

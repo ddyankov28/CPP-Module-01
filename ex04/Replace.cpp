@@ -6,7 +6,7 @@
 /*   By: ddyankov <ddyankov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 17:59:24 by ddyankov          #+#    #+#             */
-/*   Updated: 2023/09/01 17:36:23 by ddyankov         ###   ########.fr       */
+/*   Updated: 2023/09/04 20:08:24 by ddyankov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int Replace::checkArgs()
 {
     if (_ac != 4)
     {
-        std::cout << "Usage: ./a.out <filename> s1 s2 " << std::endl;
+        std::cout << "❗️Usage: ./a.out <filename> s1 s2❗️" << std::endl;
         return 0;
     }
     return 1;
@@ -53,19 +53,17 @@ int Replace::openFile()
     std::ifstream inp(_filename);
     if (inp.fail())
     {
-        std::cerr << "Error while opening the file" << std::endl;
+        std::cerr << "⛔️ Error while opening the file! ⛔️" << std::endl;
         return 0;
     }
     while (std::getline(inp, _temp))
     {
         _content += _temp;
          if (!inp.eof()) 
-         _content += "\n";
+            _content += "\n";
     }
-    _temp = "";
     if (inp.is_open())
         inp.close();
-    //outfile << _content;
     return 1;
 }
 
@@ -73,28 +71,52 @@ bool    Replace::replaceString()
 {
     size_t pos = 0;
     size_t start = 0;
+    int flag = 0;
     
     if(_s1.empty())
     {
-        std::cout << "Error: You can't replace an empty string" << std::endl;
+        std::cout << "⛔️ Error: You can't replace an empty string ⛔️" << std::endl;
         return false;
     }
-    else if (_s1 == _s2)  //just wann save some time : )
+    else if (_s1 == _s2)
+    {
+        std::cout << "❗️Nothing will change: s1 = s2❗️" << std::endl;
         return true;
+    }
     while (1)
     {
         pos = _content.find(_s1, start);
-        if (pos != std::string::npos)
+        if (pos == std::string::npos)
         {
-            _temp += _content.substr(start, pos);
-            start = pos + _s1.length();
-            _temp += _s2; 
-        }
-        else 
+            
+            if (!flag)
+                std::cout << "❗️Can't find <" << _s1 << "> in here. The old file will be used❗️" << std::endl; 
             break ;
+        }
+        flag = 1;
+        _content.erase(pos, _s1.length());
+        _content.insert(pos, _s2);
+        start = pos + _s2.length();
     }
-    std::cout << _temp;
     return true;        
+}
+bool    Replace::createNewFile()
+{
+    std::ofstream out;
+    std::string newName = _filename;
+    newName += ".replace";
+    
+    out.open(newName.c_str(), std::ofstream::out);
+    if (out.fail())
+    {
+        std::cerr << "⛔️ Error while creating the file! ⛔️" << std::endl;
+        return false;
+    }
+    out << _content;
+    if (out.is_open())
+        out.close();
+    return true;
+        
 }
 
 int Replace::startReplace(char **av)
@@ -105,6 +127,8 @@ int Replace::startReplace(char **av)
     if (!openFile())
         return 0;
     if (!replaceString())
+        return 0;
+    if (!createNewFile())
         return 0;
     return 1;
 }

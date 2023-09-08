@@ -5,14 +5,14 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ddyankov <ddyankov@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/31 10:38:22 by ddyankov          #+#    #+#              #
-#    Updated: 2023/09/04 17:17:02 by ddyankov         ###   ########.fr        #
+#    Created: 2023/09/03 15:25:01 by ddyankov          #+#    #+#              #
+#    Updated: 2023/09/03 15:25:09 by ddyankov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = harlFilter
 
-SRC = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRC = main.cpp Harl.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

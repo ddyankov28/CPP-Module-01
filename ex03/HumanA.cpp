@@ -6,7 +6,7 @@
 /*   By: ddyankov <ddyankov@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 12:35:17 by ddyankov          #+#    #+#             */
-/*   Updated: 2023/08/31 17:48:04 by ddyankov         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:23:24 by ddyankov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ HumanA::~HumanA()
 }
 void    HumanA::attack()
 {
-    std::cout <<  _name << " attacks with " << _weapon->getType() << std::endl;
+    std::cout << "🏏" <<  _name << " attacks with " << _weapon->getType() << "🏏" << std::endl;
 }
